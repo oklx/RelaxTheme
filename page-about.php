@@ -20,7 +20,7 @@ $githubUsername = $options->githubUsername;
 $aboutSkills = $options->aboutSkills;
 $siteCreatedDate = $options->siteCreatedDate;
 $education = daydream_parse_lines($options->aboutEducation, array('time', 'school', 'major', 'desc'));
-$honors = daydream_parse_lines($options->aboutHonors, array('name', 'time', 'desc'));
+$honors = daydream_parse_lines($options->aboutHonors, array('name', 'time', 'desc', 'color'));
 $contacts = daydream_parse_lines($options->aboutContacts, array('type', 'value', 'qr'));
 $websites = daydream_parse_lines($options->aboutWebsites, array('name', 'url', 'desc', 'icon'));
 $socials = daydream_parse_lines($options->aboutSocials, array('platform', 'url', 'icon', 'iconUrl'));
@@ -93,7 +93,8 @@ Typecho_Widget::widget('Widget_Stat')->to($stat);
         <h2><i class="czs-medal"></i> 所获荣誉</h2>
         <div class="honor-list">
             <?php foreach ($honors as $honor): ?>
-            <div class="honor-item">
+            <?php $honorColorClass = daydream_honor_color_class($honor['color']); ?>
+            <div class="honor-item<?php echo $honorColorClass ? ' ' . $honorColorClass : ''; ?>">
                 <span class="honor-icon"><i class="czs-medal-l"></i></span>
                 <div class="honor-body">
                     <div class="honor-head">

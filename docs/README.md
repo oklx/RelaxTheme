@@ -149,10 +149,14 @@ Daydream/
 |--------|--------|------|------|
 | 个人介绍 | `aboutIntro` | Textarea | 支持 HTML 的个人介绍文字 |
 | 头像地址 | `aboutAvatar` | Text | 留空则使用站点 LOGO |
+| 教育经历 | `aboutEducation` | Textarea | 每行一个：`时间\|学校\|专业\|说明(可选)`，简历式时间轴 |
 | GitHub 用户名 | `githubUsername` | Text | 用于 API 获取仓库列表 |
-| 个人网站 | `aboutWebsites` | Textarea | 每行一个：`名称\|URL\|描述` |
-| 社交账号 | `aboutSocials` | Textarea | 每行一个：`平台名\|URL\|图标名(可选)` |
+| GitHub 显示数量/包含/排除 | `githubRepoCount` / `githubInclude` / `githubExclude` | Text/Textarea | 展示数量（默认 6）；必显示/不显示的仓库名列表 |
+| 个人网站 | `aboutWebsites` | Textarea | 每行一个：`名称\|URL\|描述\|图标URL(可选)` |
+| 社交账号 | `aboutSocials` | Textarea | 每行一个：`平台名\|URL\|图标名(可选)\|图标URL(可选)` |
+| 联系方式 | `aboutContacts` | Textarea | 每行一个：`类型\|内容\|二维码图片URL(可选)`。链接类自动识别邮箱 `mailto:`、QQ 号（wpa.qq.com）；带二维码的项鼠标悬停弹出二维码 |
 | 技能标签 | `aboutSkills` | Text | 逗号分隔的技能列表 |
+| 所获荣誉 | `aboutHonors` | Textarea | 每行一个：`名称\|获奖时间\|小字说明(可选)\|图标颜色(可选)`。颜色可选：金（默认）/ 银 / 铜 / 红 / 橙 / 蓝 / 绿 / 紫 / 青 / 粉，也支持英文名 |
 | 网站创建日期 | `siteCreatedDate` | Text | 格式 `YYYY-MM-DD`，用于计算运行天数 |
 
 ---

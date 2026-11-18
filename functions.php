@@ -72,7 +72,7 @@ function themeConfig($form) {
     $aboutEducation = new Typecho_Widget_Helper_Form_Element_Textarea('aboutEducation', NULL, NULL, '关于页面 - 教育经历', '每行一个，格式：时间|学校|专业|说明(可选)。例如：<br>2018.09 - 2022.06|某某大学|计算机科学与技术|工学学士');
     $form->addInput($aboutEducation);
 
-    $aboutHonors = new Typecho_Widget_Helper_Form_Element_Textarea('aboutHonors', NULL, NULL, '关于页面 - 所获荣誉', '每行一个，格式：名称|获奖时间|小字说明(可选)。例如：<br>国家奖学金|2021-11|成绩排名前 1%');
+    $aboutHonors = new Typecho_Widget_Helper_Form_Element_Textarea('aboutHonors', NULL, NULL, '关于页面 - 所获荣誉', '每行一个，格式：名称|获奖时间|小字说明(可选)|图标颜色(可选)。<br>颜色可用：金（默认）/ 银 / 铜 / 红 / 橙 / 蓝 / 绿 / 紫 / 青 / 粉，也接受英文名。<br>例如：<br>国家奖学金|2021-11|成绩排名前 1%|金<br>优秀毕业生|2022-06|校级荣誉|蓝<br> ACM 区域赛铜牌|2019-11||铜');
     $form->addInput($aboutHonors);
 
     $siteCreatedDate = new Typecho_Widget_Helper_Form_Element_Text('siteCreatedDate', NULL, NULL, '关于页面 - 网站创建日期', '格式 YYYY-MM-DD，用于计算网站运行天数。例如：2020-01-01');
@@ -395,6 +395,29 @@ function daydream_social_icon_class($icon) {
         '电报'      => 'czs-telegram',
     );
     $key = strtolower(trim($icon)); // strtolower 不影响中文字符，中英文键一次查找即可
+    return isset($map[$key]) ? $map[$key] : '';
+}
+
+/**
+ * 将荣誉图标颜色名称映射为 CSS 类名
+ * 可用：金银铜红橙蓝绿紫青粉（中英文均可，大小写不敏感）
+ * @param string $color  颜色名
+ * @return string  CSS 类名，未匹配返回空字符串（默认金色）
+ */
+function daydream_honor_color_class($color) {
+    $map = array(
+        '金'  => 'honor-gold',   '金色' => 'honor-gold',   'gold' => 'honor-gold',   'yellow' => 'honor-gold',
+        '银'  => 'honor-silver', '银色' => 'honor-silver', 'silver' => 'honor-silver', '白' => 'honor-silver',
+        '铜'  => 'honor-bronze', '铜色' => 'honor-bronze', 'bronze' => 'honor-bronze',
+        '红'  => 'honor-red',    '红色' => 'honor-red',    'red' => 'honor-red',
+        '橙'  => 'honor-orange', '橙色' => 'honor-orange', '橘' => 'honor-orange', '橘色' => 'honor-orange', 'orange' => 'honor-orange',
+        '蓝'  => 'honor-blue',   '蓝色' => 'honor-blue',   'blue' => 'honor-blue',
+        '绿'  => 'honor-green',  '绿色' => 'honor-green',  'green' => 'honor-green',
+        '紫'  => 'honor-purple', '紫色' => 'honor-purple', 'purple' => 'honor-purple',
+        '青'  => 'honor-cyan',   '青色' => 'honor-cyan',   'cyan' => 'honor-cyan',   'teal' => 'honor-cyan',
+        '粉'  => 'honor-pink',   '粉色' => 'honor-pink',   'pink' => 'honor-pink',
+    );
+    $key = strtolower(trim($color)); // strtolower 不影响中文，中英文一次查找
     return isset($map[$key]) ? $map[$key] : '';
 }
 

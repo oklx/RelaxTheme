@@ -464,7 +464,14 @@
     gap: 0.65rem;
 }
 
+/* 图标配色通过 CSS 变量注入，未指定颜色时为金色（默认）
+ * 变体类 .honor-{silver|bronze|red|orange|blue|green|purple|cyan|pink} 只需覆盖变量 */
 .honor-item {
+    --honor-c: #c8930a;
+    --honor-bg: rgba(250, 204, 21, 0.12);
+    --honor-bd: rgba(220, 160, 30, 0.25);
+    --honor-hover: rgba(220, 160, 30, 0.45);
+
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
@@ -475,16 +482,21 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 [data-theme="dark"] .honor-item {
+    --honor-c: #e6b43c;
+    --honor-bg: rgba(250, 204, 21, 0.10);
+    --honor-bd: rgba(230, 180, 60, 0.30);
+    --honor-hover: rgba(230, 180, 60, 0.45);
+
     border-color: rgba(255, 255, 255, 0.14);
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
 }
 .honor-item:hover {
     transform: translateY(-1px);
-    border-color: rgba(220, 160, 30, 0.45);
+    border-color: var(--honor-hover);
     box-shadow: 0 6px 16px rgba(2, 6, 23, 0.08);
 }
 [data-theme="dark"] .honor-item:hover {
-    border-color: rgba(230, 180, 60, 0.45);
+    border-color: var(--honor-hover);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -497,14 +509,73 @@
     height: 34px;
     border-radius: 50%;
     font-size: 1.05em;
-    color: #c8930a;
-    background: rgba(250, 204, 21, 0.12);
-    border: 1px solid rgba(220, 160, 30, 0.25);
+    color: var(--honor-c);
+    background: var(--honor-bg);
+    border: 1px solid var(--honor-bd);
 }
-[data-theme="dark"] .honor-icon {
-    color: #e6b43c;
-    background: rgba(250, 204, 21, 0.10);
-    border-color: rgba(230, 180, 60, 0.3);
+
+/* ---- 荣誉颜色变体（浅色 / 深色） ---- */
+.honor-item.honor-silver {
+    --honor-c: #68727d; --honor-bg: rgba(148, 163, 184, 0.14); --honor-bd: rgba(148, 163, 184, 0.35); --honor-hover: rgba(100, 116, 139, 0.40);
+}
+[data-theme="dark"] .honor-item.honor-silver {
+    --honor-c: #b7bfca; --honor-bg: rgba(148, 163, 184, 0.13); --honor-bd: rgba(148, 163, 184, 0.32); --honor-hover: rgba(148, 163, 184, 0.45);
+}
+
+.honor-item.honor-bronze {
+    --honor-c: #a05a2c; --honor-bg: rgba(176, 110, 64, 0.13); --honor-bd: rgba(160, 90, 44, 0.35); --honor-hover: rgba(160, 90, 44, 0.40);
+}
+[data-theme="dark"] .honor-item.honor-bronze {
+    --honor-c: #c98850; --honor-bg: rgba(176, 110, 64, 0.14); --honor-bd: rgba(176, 110, 64, 0.34); --honor-hover: rgba(176, 110, 64, 0.45);
+}
+
+.honor-item.honor-red {
+    --honor-c: #c62828; --honor-bg: rgba(211, 47, 47, 0.10); --honor-bd: rgba(198, 40, 40, 0.30); --honor-hover: rgba(198, 40, 40, 0.38);
+}
+[data-theme="dark"] .honor-item.honor-red {
+    --honor-c: #ef7b7b; --honor-bg: rgba(211, 47, 47, 0.14); --honor-bd: rgba(239, 123, 123, 0.32); --honor-hover: rgba(239, 123, 123, 0.40);
+}
+
+.honor-item.honor-orange {
+    --honor-c: #d84315; --honor-bg: rgba(232, 81, 17, 0.10); --honor-bd: rgba(216, 67, 21, 0.28); --honor-hover: rgba(216, 67, 21, 0.38);
+}
+[data-theme="dark"] .honor-item.honor-orange {
+    --honor-c: #f08a5d; --honor-bg: rgba(240, 138, 93, 0.12); --honor-bd: rgba(240, 138, 93, 0.30); --honor-hover: rgba(240, 138, 93, 0.40);
+}
+
+.honor-item.honor-blue {
+    --honor-c: #1565c0; --honor-bg: rgba(21, 101, 192, 0.10); --honor-bd: rgba(21, 101, 192, 0.28); --honor-hover: rgba(21, 101, 192, 0.38);
+}
+[data-theme="dark"] .honor-item.honor-blue {
+    --honor-c: #6ca8f5; --honor-bg: rgba(108, 168, 245, 0.12); --honor-bd: rgba(108, 168, 245, 0.30); --honor-hover: rgba(108, 168, 245, 0.40);
+}
+
+.honor-item.honor-green {
+    --honor-c: #2e7d32; --honor-bg: rgba(46, 125, 50, 0.10); --honor-bd: rgba(46, 125, 50, 0.28); --honor-hover: rgba(46, 125, 50, 0.38);
+}
+[data-theme="dark"] .honor-item.honor-green {
+    --honor-c: #66bb6a; --honor-bg: rgba(102, 187, 106, 0.12); --honor-bd: rgba(102, 187, 106, 0.30); --honor-hover: rgba(102, 187, 106, 0.40);
+}
+
+.honor-item.honor-purple {
+    --honor-c: #6a1b9a; --honor-bg: rgba(106, 27, 154, 0.10); --honor-bd: rgba(106, 27, 154, 0.30); --honor-hover: rgba(106, 27, 154, 0.38);
+}
+[data-theme="dark"] .honor-item.honor-purple {
+    --honor-c: #ab77d8; --honor-bg: rgba(171, 119, 216, 0.12); --honor-bd: rgba(171, 119, 216, 0.30); --honor-hover: rgba(171, 119, 216, 0.40);
+}
+
+.honor-item.honor-cyan {
+    --honor-c: #00838f; --honor-bg: rgba(0, 131, 143, 0.10); --honor-bd: rgba(0, 131, 143, 0.28); --honor-hover: rgba(0, 131, 143, 0.38);
+}
+[data-theme="dark"] .honor-item.honor-cyan {
+    --honor-c: #4dd0e1; --honor-bg: rgba(77, 208, 225, 0.12); --honor-bd: rgba(77, 208, 225, 0.30); --honor-hover: rgba(77, 208, 225, 0.40);
+}
+
+.honor-item.honor-pink {
+    --honor-c: #ad1457; --honor-bg: rgba(173, 20, 87, 0.10); --honor-bd: rgba(173, 20, 87, 0.28); --honor-hover: rgba(173, 20, 87, 0.38);
+}
+[data-theme="dark"] .honor-item.honor-pink {
+    --honor-c: #e977b0; --honor-bg: rgba(233, 119, 176, 0.12); --honor-bd: rgba(233, 119, 176, 0.30); --honor-hover: rgba(233, 119, 176, 0.40);
 }
 
 .honor-body {
