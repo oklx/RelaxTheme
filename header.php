@@ -448,56 +448,57 @@ html, body { overflow-x: hidden; }
 </style>
 
 <style id="more-pill">
-/* 命中两种情况：已有 .more，或摘要里只有这一个链接 */
+/* “阅读全文”按钮：黑白灰主色，干净自然；hover 时反色 */
 .summary a.more,
 .summary > a:only-child{
   display:inline-flex;
   align-items:center;
-  gap:.4em;
-  padding:.46em .9em;
+  gap:.45em;
+  padding:.52em 1.2em;
   border-radius:999px;
-  font-size:.95em;
+  font-size:.9em;
   line-height:1;
+  letter-spacing:.02em;
   text-decoration:none;
-  border:1px solid rgba(2,6,23,.12);
-  background: linear-gradient(180deg, rgba(2,6,23,.03), rgba(2,6,23,.02));
-  color:#1f2c40;
-  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .15s ease;
+  color:inherit;
+  background:transparent;
+  border:1px solid rgba(2,6,23,.22);
+  transition:background .18s ease, color .18s ease, border-color .18s ease;
 }
 [data-theme="dark"] .summary a.more,
 [data-theme="dark"] .summary > a:only-child{
-  border-color: rgba(255,255,255,.14);
-  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.06));
-  color:#e6edf6;
+  border-color:rgba(255,255,255,.26);
 }
-/* 箭头装饰 */
+/* 内嵌小箭头：随文字自然流动 */
 .summary a.more::after,
 .summary > a:only-child::after{
-  content:"↗";
-  font-size:.9em;
-  opacity:.7;
-  transform: translateY(-.5px);
-  transition: transform .2s ease, opacity .2s ease;
+  content:"→";
+  font-size:.95em;
+  opacity:.55;
+  transition:transform .18s ease, opacity .18s ease;
 }
-/* hover/focus */
+/* hover：黑底白字的“反色”（暗色模式下白底黑字） */
 .summary a.more:hover,
-.summary a.more:focus,
+.summary a.more:focus-visible,
 .summary > a:only-child:hover,
-.summary > a:only-child:focus{
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(2,6,23,.08);
-  border-color: rgba(2,6,23,.18);
+.summary > a:only-child:focus-visible{
+  background:#111827;
+  border-color:#111827;
+  color:#fff;
 }
 [data-theme="dark"] .summary a.more:hover,
-[data-theme="dark"] .summary a.more:focus,
+[data-theme="dark"] .summary a.more:focus-visible,
 [data-theme="dark"] .summary > a:only-child:hover,
-[data-theme="dark"] .summary > a:only-child:focus{
-  box-shadow: 0 6px 20px rgba(0,0,0,.35);
-  border-color: rgba(255,255,255,.22);
+[data-theme="dark"] .summary > a:only-child:focus-visible{
+  background:#e5e7eb;
+  border-color:#e5e7eb;
+  color:#0b1220;
 }
-/* 箭头轻微前移 */
 .summary a.more:hover::after,
-.summary > a:only-child:hover::after{ transform: translate(2px,-1px); opacity:.9; }
+.summary > a:only-child:hover::after{
+  opacity:.9;
+  transform:translateX(2px);
+}
 
 /* 与摘要段落的间距更匀称 */
 .summary{ margin-bottom:.4rem; }
@@ -877,30 +878,7 @@ html, body { overflow-x: hidden; }
 }
 #tableOfContents a::after{ content: none !important; }
 
-/* ========== 明确把“阅读全文”胶囊、标题/导航链接排除在外 ========== */
-/* 还原“阅读全文”胶囊的小箭头（不受正文链接规则影响） */
-/* 让“阅读全文”胶囊的箭头固定在右上角，不占文字间距 */
-.summary a.more{
-  position: relative;
-  padding-right: 1.8em;              /* 给右侧留出箭头空间 */
-  border-bottom: none !important;     /* 按钮不需要底线 */
-}
-
-.summary a.more::after{
-  content: "↗";
-  position: absolute;
-  right: .65em;                       /* 箭头靠右一点 */
-  top: .70em;                         /* 稍微靠上，像右上角标 */
-  font-size: .9em;
-  opacity: .82;
-  transform: translateX(1px);         /* 轻微右移更灵动 */
-  transition: transform .18s ease, opacity .18s ease;
-}
-
-.summary a.more:hover::after{
-  opacity: .95;
-  transform: translateX(2px);         /* 悬停时轻微前移 */
-}
+/* ========== “阅读全文”胶囊：箭头与边框统一样式见 <style id="more-pill"> ========== */
 
 
 
@@ -1116,6 +1094,25 @@ main           .katex-scroll{
 }
 #fab:hover{ transform: translateY(-2px); background: var(--panel-hover); }
 
+/* 悬浮黑白切换按钮：与阅读工具互补（仅首页 / 独立页面显示） */
+#theme-fab{
+  position: fixed; right: 16px; bottom: 16px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--fab-bg); color: var(--fab-fg);
+  border: 1px solid var(--fab-bd);
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: var(--fab-shadow);
+  cursor: pointer; user-select: none; z-index: 10000;
+  padding: 0; font: inherit;
+  transition: transform .15s ease, background .2s ease, border-color .2s ease, filter .2s ease;
+}
+#theme-fab:hover{ transform: translateY(-2px); background: var(--panel-hover); }
+#theme-fab svg{ animation: tfabIconIn .3s ease; }
+@keyframes tfabIconIn{
+  from{ opacity: 0; transform: rotate(-50deg) scale(.6); }
+  to  { opacity: 1; transform: rotate(0) scale(1); }
+}
+
 /* 面板：暗色更暗；无玻璃特效；边距为 TOC 留足底部空间 */
 #fab-panel{
   position: fixed; right: 16px; bottom: 72px;
@@ -1148,6 +1145,7 @@ main           .katex-scroll{
 }
 #fab-panel .iconbtn:hover{ background: var(--panel-hover); }
 #fab-panel .iconbtn:active{ transform: translateY(1px); }
+#fab-panel .iconbtn svg{ width: 16px; height: 16px; display: block; }
 
 /* 内容区：给滚动区域加底部内边距 & scroll-padding，最后一项不再被裁 */
 #fab-panel .bd{
@@ -1171,6 +1169,7 @@ main           .katex-scroll{
 
 @media (max-width: 480px){
   #fab{ right: 12px; bottom: 12px; }
+  #theme-fab{ right: 12px; bottom: 12px; }
   #fab-panel{ right: 12px; bottom: 68px; width: min(94vw, 360px); }
 }
 </style>
@@ -1184,7 +1183,10 @@ main           .katex-scroll{
     return true;
   }
 
-  /* —— 主题：读取/切换/同步两个位置的图标 —— */
+  /* —— 主题：读取/切换/同步图标 —— */
+  var ICON_MOON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>';
+  var ICON_SUN  = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M5.2 18.8l1.6-1.6M17.2 6.8l1.6-1.6"/></svg>';
+
   function getMode(){
     var saved = localStorage.getItem('theme');
     if (saved==='light' || saved==='dark') return saved;
@@ -1200,10 +1202,10 @@ main           .katex-scroll{
   function syncThemeIcons(){
     // 面板图标
     var t1 = document.getElementById('rt-theme');
-    if (t1) { var m = getMode(); t1.textContent = (m==='dark') ? '🌞' : '🌙'; t1.title = (m==='dark') ? '切换为亮色' : '切换为暗色'; }
-    // 标题栏图标（你现有的）
-    var t2 = document.getElementById('theme-toggle-icon');
-    if (t2) { var m2 = getMode(); t2.textContent = (m2==='dark') ? '🌞' : '🌙'; t2.title = (m2==='dark') ? '切换到白天模式' : '切换到黑夜模式'; }
+    if (t1) { var m = getMode(); t1.innerHTML = (m==='dark') ? ICON_SUN : ICON_MOON; t1.title = (m==='dark') ? '切换为亮色' : '切换为暗色'; }
+    // 右下角悬浮黑白切换按钮（仅无阅读工具的页面显示）
+    var tf = document.getElementById('theme-fab');
+    if (tf) { var m2 = getMode(); tf.innerHTML = (m2==='dark') ? ICON_SUN : ICON_MOON; tf.title = (m2==='dark') ? '切换为亮色' : '切换为暗色'; tf.setAttribute('aria-label', tf.title); }
   }
 
   /* —— 生成/获取 FAB 与面板（只建一次） —— */
@@ -1214,7 +1216,9 @@ main           .katex-scroll{
       fab = document.createElement('div');
       fab.id = 'fab';
       fab.title = '阅读工具';
-      fab.textContent = '☰';
+      fab.setAttribute('role', 'button');
+      /* 内联 SVG：三横线几何居中，不受字体字形基线影响 */
+      fab.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
       document.body.appendChild(fab);
     }
     if (!panel){
@@ -1233,6 +1237,17 @@ main           .katex-scroll{
           <div id="fab-toc">本页暂无目录</div>
         </div>`;
       document.body.appendChild(panel);
+    }
+
+    /* 悬浮黑白切换按钮：只在无阅读工具的页面显示（见 applyVisibility） */
+    var tfab = document.getElementById('theme-fab');
+    if (!tfab){
+      tfab = document.createElement('button');
+      tfab.type = 'button';
+      tfab.id = 'theme-fab';
+      tfab.title = '切换深浅色';
+      tfab.setAttribute('aria-label', '切换深浅色');
+      document.body.appendChild(tfab);
     }
 
     /* 事件只绑定一次 */
@@ -1258,6 +1273,15 @@ main           .katex-scroll{
     if (btnTheme && !btnTheme.dataset.bound){
       btnTheme.dataset.bound = '1';
       btnTheme.addEventListener('click', function(){
+        var cur = getMode();
+        setMode(cur === 'dark' ? 'light' : 'dark');
+      });
+    }
+
+    var btnTFab = document.getElementById('theme-fab');
+    if (btnTFab && !btnTFab.dataset.bound){
+      btnTFab.dataset.bound = '1';
+      btnTFab.addEventListener('click', function(){
         var cur = getMode();
         setMode(cur === 'dark' ? 'light' : 'dark');
       });
@@ -1317,6 +1341,9 @@ main           .katex-scroll{
     if (!fab || !panel) return;
     fab.style.display = show ? 'inline-flex' : 'none';
     panel.classList.remove('open');
+    /* 黑白切换悬浮按钮：与阅读工具互补，同一时刻只显示一个 */
+    var tfab = document.getElementById('theme-fab');
+    if (tfab) tfab.style.display = show ? 'none' : 'inline-flex';
   }
 
   /* —— 初始化（首屏 & PJAX 后） —— */
@@ -1433,12 +1460,6 @@ main           .katex-scroll{
         <li>
             <a href="/friends.html"><i class="czs-people"></i> 友情链接</a>
         </li>
-<li>
-  <button id="theme-toggle" type="button" style="border:none;background:transparent;cursor:pointer;">
-    <span id="theme-toggle-icon" aria-hidden="true">🌙/🌞</span>
-    <span class="sr-only"></span>
-  </button>
-</li>
 
     </ul>
 </nav>
