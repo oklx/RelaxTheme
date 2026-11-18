@@ -345,6 +345,355 @@
     border-color: rgba(255, 255, 255, 0.15);
 }
 
+/* ---- 教育经历（简历式时间轴） ---- */
+.edu-timeline {
+    position: relative;
+    padding-left: 1.4rem;
+}
+.edu-timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    bottom: 12px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgba(30, 136, 229, 0.4), rgba(30, 136, 229, 0.12));
+}
+[data-theme="dark"] .edu-timeline::before {
+    background: linear-gradient(180deg, rgba(100, 160, 240, 0.45), rgba(100, 160, 240, 0.12));
+}
+
+.edu-item {
+    position: relative;
+    padding: 0 0 1.2rem 0.9rem;
+}
+.edu-item:last-child {
+    padding-bottom: 0.35rem;
+}
+.edu-item::before {
+    content: '';
+    position: absolute;
+    left: -1.4rem;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.18);
+    transform: translateX(-1px);
+}
+[data-theme="dark"] .edu-item::before {
+    background: #6ca8f5;
+    box-shadow: 0 0 0 4px rgba(100, 160, 240, 0.22);
+}
+
+.edu-body {
+    padding: 0.75rem 1rem 0.85rem;
+    border-radius: 12px;
+    border: 1px solid rgba(2, 6, 23, 0.10);
+    background: linear-gradient(180deg, rgba(2, 6, 23, 0.02), rgba(2, 6, 23, 0.01));
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+[data-theme="dark"] .edu-body {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
+}
+.edu-item:hover .edu-body {
+    border-color: rgba(30, 136, 229, 0.35);
+    box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
+    transform: translateX(2px);
+}
+[data-theme="dark"] .edu-item:hover .edu-body {
+    border-color: rgba(100, 160, 240, 0.4);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+.edu-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.edu-school {
+    font-weight: 600;
+    font-size: 1.02em;
+}
+
+.edu-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    font-size: 0.8em;
+    color: var(--muted-color);
+    padding: 0.15em 0.6em;
+    border-radius: 999px;
+    border: 1px solid rgba(2, 6, 23, 0.10);
+    background: rgba(2, 6, 23, 0.03);
+    white-space: nowrap;
+}
+[data-theme="dark"] .edu-time {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.07);
+}
+.edu-time i {
+    font-size: 1em;
+    opacity: 0.75;
+}
+
+.edu-major {
+    margin-top: 0.3rem;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+.edu-desc {
+    margin-top: 0.35rem;
+    font-size: 0.82em;
+    color: var(--muted-color);
+    line-height: 1.6;
+}
+
+/* ---- 所获荣誉 ---- */
+.honor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.honor-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(2, 6, 23, 0.10);
+    background: linear-gradient(180deg, rgba(2, 6, 23, 0.02), rgba(2, 6, 23, 0.01));
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+[data-theme="dark"] .honor-item {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
+}
+.honor-item:hover {
+    transform: translateY(-1px);
+    border-color: rgba(220, 160, 30, 0.45);
+    box-shadow: 0 6px 16px rgba(2, 6, 23, 0.08);
+}
+[data-theme="dark"] .honor-item:hover {
+    border-color: rgba(230, 180, 60, 0.45);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.honor-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 1.05em;
+    color: #c8930a;
+    background: rgba(250, 204, 21, 0.12);
+    border: 1px solid rgba(220, 160, 30, 0.25);
+}
+[data-theme="dark"] .honor-icon {
+    color: #e6b43c;
+    background: rgba(250, 204, 21, 0.10);
+    border-color: rgba(230, 180, 60, 0.3);
+}
+
+.honor-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.honor-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.honor-name {
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.honor-time {
+    font-size: 0.78em;
+    color: var(--muted-color);
+    padding: 0.12em 0.6em;
+    border-radius: 999px;
+    border: 1px solid rgba(2, 6, 23, 0.10);
+    background: rgba(2, 6, 23, 0.03);
+    white-space: nowrap;
+}
+[data-theme="dark"] .honor-time {
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.honor-desc {
+    margin-top: 0.25rem;
+    font-size: 0.8em;
+    color: var(--muted-color);
+    line-height: 1.55;
+}
+
+/* ---- 联系方式 ---- */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0.75rem;
+}
+
+.contact-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.7rem 0.95rem;
+    border-radius: 12px;
+    border: 1px solid rgba(2, 6, 23, 0.10);
+    background: linear-gradient(180deg, rgba(2, 6, 23, 0.02), rgba(2, 6, 23, 0.01));
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+[data-theme="dark"] .contact-card {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
+}
+.contact-card:hover,
+.contact-card:focus-visible,
+.contact-card:active {
+    transform: translateY(-2px);
+    border-color: rgba(30, 136, 229, 0.4);
+    box-shadow: 0 6px 16px rgba(2, 6, 23, 0.10);
+}
+[data-theme="dark"] .contact-card:hover,
+[data-theme="dark"] .contact-card:focus-visible,
+[data-theme="dark"] .contact-card:active {
+    border-color: rgba(100, 160, 240, 0.45);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    font-size: 1.25em;
+    color: var(--primary);
+}
+[data-theme="dark"] .contact-icon {
+    color: #6ca8f5;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.contact-name {
+    font-size: 0.92em;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.contact-value {
+    font-size: 0.78em;
+    color: var(--muted-color);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 二维码角标（提示可悬停） */
+.contact-qr-badge {
+    position: absolute;
+    right: 0.7rem;
+    top: 0.55rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    font-size: 0.9em;
+    color: var(--muted-color);
+    opacity: 0.7;
+    pointer-events: none;
+}
+.contact-qr .contact-info {
+    padding-right: 1.6rem;
+}
+
+/* 二维码弹出层（悬停 / 触摸 / 键盘聚焦时显示） */
+.qr-pop {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px) scale(0.96);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem;
+    border-radius: 14px;
+    border: 1px solid rgba(2, 6, 23, 0.12);
+    background: #fff;
+    box-shadow: 0 12px 32px rgba(2, 6, 23, 0.18);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    z-index: 30;
+}
+.qr-pop::after {
+    /* 小三角箭头 */
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid rgba(2, 6, 23, 0.12);
+    border-left: 1px solid rgba(2, 6, 23, 0.12);
+    background: #fff;
+}
+.qr-pop img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 8px;
+}
+.qr-pop-tip {
+    font-size: 0.75em;
+    color: #555;
+    line-height: 1;
+    white-space: nowrap;
+}
+.contact-card.contact-qr:hover .qr-pop,
+.contact-card.contact-qr:focus-visible .qr-pop,
+.contact-card.contact-qr:active .qr-pop {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
 /* ---- 响应式 ---- */
 @media (max-width: 480px) {
     .about-cards-grid {
@@ -352,6 +701,9 @@
     }
     .social-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .contact-grid {
+        grid-template-columns: 1fr;
     }
     .site-info-grid {
         gap: 0.5rem;
@@ -361,5 +713,16 @@
     }
     .info-item {
         padding: 0.85rem 0.3rem;
+    }
+    .edu-head {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    .edu-time {
+        align-self: flex-start;
+    }
+    .qr-pop img {
+        width: 120px;
+        height: 120px;
     }
 }

@@ -19,6 +19,9 @@ $aboutIntro = $options->aboutIntro;
 $githubUsername = $options->githubUsername;
 $aboutSkills = $options->aboutSkills;
 $siteCreatedDate = $options->siteCreatedDate;
+$education = daydream_parse_lines($options->aboutEducation, array('time', 'school', 'major', 'desc'));
+$honors = daydream_parse_lines($options->aboutHonors, array('name', 'time', 'desc'));
+$contacts = daydream_parse_lines($options->aboutContacts, array('type', 'value', 'qr'));
 $websites = daydream_parse_lines($options->aboutWebsites, array('name', 'url', 'desc', 'icon'));
 $socials = daydream_parse_lines($options->aboutSocials, array('platform', 'url', 'icon', 'iconUrl'));
 
@@ -43,10 +46,37 @@ Typecho_Widget::widget('Widget_Stat')->to($stat);
         </div>
     <?php endif; ?>
 
+    <!-- 教育经历 -->
+    <?php if (!empty($education)): ?>
+    <section id="about-education">
+        <h2><i class="czs-blackboard-l"></i> 教育经历</h2>
+        <div class="edu-timeline">
+            <?php foreach ($education as $edu): ?>
+            <div class="edu-item">
+                <div class="edu-body">
+                    <div class="edu-head">
+                        <span class="edu-school"><?php echo htmlspecialchars($edu['school']); ?></span>
+                        <?php if ($edu['time']): ?>
+                        <span class="edu-time"><i class="czs-calendar-l"></i> <?php echo htmlspecialchars($edu['time']); ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <?php if ($edu['major']): ?>
+                    <div class="edu-major"><?php echo htmlspecialchars($edu['major']); ?></div>
+                    <?php endif; ?>
+                    <?php if ($edu['desc']): ?>
+                    <div class="edu-desc"><?php echo htmlspecialchars($edu['desc']); ?></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+    <?php endif; ?>
+
     <!-- 技能标签 -->
     <?php if ($aboutSkills): ?>
     <section id="about-skills">
-        <h2><i class="czs-code"></i> 技能</h2>
+        <h2><i class="czs-code-l"></i> 技能</h2>
         <div class="skill-tags">
             <?php foreach (array_map('trim', explode(',', $aboutSkills)) as $skill): ?>
                 <?php if ($skill !== ''): ?>
@@ -57,10 +87,35 @@ Typecho_Widget::widget('Widget_Stat')->to($stat);
     </section>
     <?php endif; ?>
 
+    <!-- 所获荣誉 -->
+    <?php if (!empty($honors)): ?>
+    <section id="about-honors">
+        <h2><i class="czs-medal"></i> 所获荣誉</h2>
+        <div class="honor-list">
+            <?php foreach ($honors as $honor): ?>
+            <div class="honor-item">
+                <span class="honor-icon"><i class="czs-medal-l"></i></span>
+                <div class="honor-body">
+                    <div class="honor-head">
+                        <span class="honor-name"><?php echo htmlspecialchars($honor['name']); ?></span>
+                        <?php if ($honor['time']): ?>
+                        <span class="honor-time"><?php echo htmlspecialchars($honor['time']); ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <?php if ($honor['desc']): ?>
+                    <div class="honor-desc"><?php echo htmlspecialchars($honor['desc']); ?></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+    <?php endif; ?>
+
     <!-- 项目与网站 -->
     <?php if (!empty($websites) || $githubUsername): ?>
     <section id="about-projects">
-        <h2><i class="czs-link"></i> 项目与网站</h2>
+        <h2><i class="czs-link-l"></i> 项目与网站</h2>
 
         <?php if (!empty($websites)): ?>
         <div class="about-cards-grid" id="website-cards">
@@ -126,6 +181,65 @@ Typecho_Widget::widget('Widget_Stat')->to($stat);
                 </span>
                 <span class="social-name"><?php echo htmlspecialchars($social['platform']); ?></span>
             </a>
+            <?php endforeach; ?>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- 联系方式 -->
+    <?php if (!empty($contacts)): ?>
+    <section id="about-contact">
+        <h2><i class="czs-paper-plane-l"></i> 联系方式</h2>
+        <div class="contact-grid">
+            <?php foreach ($contacts as $contact):
+                $ctype = trim($contact['type']);
+                $cvalue = trim($contact['value']);
+                $cqr = trim($contact['qr']);
+                $cIconClass = daydream_social_icon_class($ctype);
+                // 生成链接：邮箱 → mailto:，QQ 纯数字 → wpa.qq.com，其余原样
+                $cHref = '';
+                if ($cqr) {
+                    // 二维码类型：不作为链接，悬停弹出二维码
+                    $cTag = 'div';
+                } else {
+                    $cTag = 'a';
+                    if (preg_match('/^(邮箱|mail|email|e-?mail|gmail)$/i', $ctype) && !preg_match('/^mailto:/i', $cvalue)) {
+                        $cHref = 'mailto:' . $cvalue;
+                    } elseif (preg_match('/^(qq|扣扣)$/i', $ctype) && preg_match('/^\d{5,11}$/', $cvalue)) {
+                        $cHref = 'https://wpa.qq.com/msgrd?v=3&uin=' . rawurlencode($cvalue) . '&site=qq&menu=yes';
+                    } else {
+                        $cHref = $cvalue;
+                    }
+                }
+            ?>
+            <?php if ($cTag === 'a'): ?>
+            <a class="contact-card" href="<?php echo htmlspecialchars($cHref); ?>" <?php if (preg_match('/^https?:/i', $cHref)): ?>target="_blank" rel="noopener"<?php endif; ?>>
+            <?php else: ?>
+            <div class="contact-card contact-qr" tabindex="0">
+            <?php endif; ?>
+                <span class="contact-icon">
+                    <?php if ($cIconClass): ?>
+                        <i class="<?php echo $cIconClass; ?>"></i>
+                    <?php else: ?>
+                        <i class="czs-link-l"></i>
+                    <?php endif; ?>
+                </span>
+                <span class="contact-info">
+                    <span class="contact-name"><?php echo htmlspecialchars($ctype); ?></span>
+                    <?php if ($cvalue): ?>
+                    <span class="contact-value"><?php echo htmlspecialchars($cvalue); ?></span>
+                    <?php endif; ?>
+                </span>
+                <?php if ($cqr): ?>
+                <span class="contact-qr-badge"><i class="czs-qrcode-l"></i></span>
+                <?php endif; ?>
+                <?php if ($cqr): ?>
+                <span class="qr-pop">
+                    <img src="<?php echo htmlspecialchars($cqr); ?>" alt="<?php echo htmlspecialchars($ctype); ?>二维码" loading="lazy">
+                    <span class="qr-pop-tip"><?php echo htmlspecialchars($ctype); ?> 扫一扫</span>
+                </span>
+                <?php endif; ?>
+            <?php if ($cTag === 'a'): ?></a><?php else: ?></div><?php endif; ?>
             <?php endforeach; ?>
         </div>
     </section>

@@ -63,8 +63,17 @@ function themeConfig($form) {
     $aboutSocials = new Typecho_Widget_Helper_Form_Element_Textarea('aboutSocials', NULL, NULL, '关于页面 - 社交账号', '每行一个，格式：平台名|URL|图标名(可选)|图标URL(可选)。例如：GitHub|https://github.com/user|github|https://github.com/favicon.ico');
     $form->addInput($aboutSocials);
 
+    $aboutContacts = new Typecho_Widget_Helper_Form_Element_Textarea('aboutContacts', NULL, NULL, '关于页面 - 联系方式', '每行一个，格式：类型|内容|二维码图片URL(可选)。<br>链接类示例：邮箱|mailto:me@example.com　或　GitHub|https://github.com/xxx　或　QQ|123456789<br>二维码类示例：微信|微信号:xxx|https://example.com/wechat-qr.png（鼠标悬停在卡片上会弹出二维码）<br>类型可用：微信 / QQ / 邮箱 / Telegram / GitHub / 电话 等，自动匹配对应图标。');
+    $form->addInput($aboutContacts);
+
     $aboutSkills = new Typecho_Widget_Helper_Form_Element_Text('aboutSkills', NULL, NULL, '关于页面 - 技能标签', '逗号分隔，例如：PHP,JavaScript,CSS,Python');
     $form->addInput($aboutSkills);
+
+    $aboutEducation = new Typecho_Widget_Helper_Form_Element_Textarea('aboutEducation', NULL, NULL, '关于页面 - 教育经历', '每行一个，格式：时间|学校|专业|说明(可选)。例如：<br>2018.09 - 2022.06|某某大学|计算机科学与技术|工学学士');
+    $form->addInput($aboutEducation);
+
+    $aboutHonors = new Typecho_Widget_Helper_Form_Element_Textarea('aboutHonors', NULL, NULL, '关于页面 - 所获荣誉', '每行一个，格式：名称|获奖时间|小字说明(可选)。例如：<br>国家奖学金|2021-11|成绩排名前 1%');
+    $form->addInput($aboutHonors);
 
     $siteCreatedDate = new Typecho_Widget_Helper_Form_Element_Text('siteCreatedDate', NULL, NULL, '关于页面 - 网站创建日期', '格式 YYYY-MM-DD，用于计算网站运行天数。例如：2020-01-01');
     $form->addInput($siteCreatedDate);
@@ -372,8 +381,20 @@ function daydream_social_icon_class($icon) {
         'rss'      => 'czs-rss',
         'mail'     => 'czs-paper-plane',
         'email'    => 'czs-paper-plane',
+        // 中文别名
+        '微信'      => 'czs-weixin',
+        '公众号'     => 'czs-weixin',
+        '邮箱'      => 'czs-paper-plane',
+        '电子邮件'   => 'czs-paper-plane',
+        '电邮'      => 'czs-paper-plane',
+        '电话'      => 'czs-phone-l',
+        '手机'      => 'czs-phone-l',
+        '电话号码'   => 'czs-phone-l',
+        'QQ群'     => 'czs-qq',
+        'tg'       => 'czs-telegram',
+        '电报'      => 'czs-telegram',
     );
-    $key = strtolower(trim($icon));
+    $key = strtolower(trim($icon)); // strtolower 不影响中文字符，中英文键一次查找即可
     return isset($map[$key]) ? $map[$key] : '';
 }
 
