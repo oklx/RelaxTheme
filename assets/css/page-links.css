@@ -1,0 +1,152 @@
+/* ========== 友情链接页面专用样式 ========== */
+
+/* 页面容器 */
+.links-page {
+    max-width: 100%;
+}
+
+.links-page h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.links-page h1 i {
+    font-size: 0.9em;
+    opacity: 0.7;
+}
+
+/* ---- 介绍文字 ---- */
+.links-intro {
+    margin-bottom: 0;
+}
+
+/* ---- 搜索框 ---- */
+.links-search {
+    margin-bottom: 1.25rem;
+}
+
+.links-search input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(2, 6, 23, 0.12);
+    background: rgba(2, 6, 23, 0.02);
+    font-size: 0.92em;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.links-search input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.15);
+}
+[data-theme="dark"] .links-search input {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.04);
+    color: inherit;
+}
+[data-theme="dark"] .links-search input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.25);
+}
+
+/* ---- 友链卡片网格 ---- */
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.85rem;
+}
+
+/* ---- 友链卡片 ---- */
+.link-card {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(2, 6, 23, 0.10);
+    background: linear-gradient(180deg, rgba(2, 6, 23, 0.02), rgba(2, 6, 23, 0.01));
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+[data-theme="dark"] .link-card {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
+}
+.link-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(2, 6, 23, 0.20);
+    box-shadow: 0 8px 20px rgba(2, 6, 23, 0.10);
+}
+[data-theme="dark"] .link-card:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* 隐藏的卡片（搜索过滤） */
+.link-card.is-hidden {
+    display: none;
+}
+
+/* ---- 头像 ---- */
+.link-card-avatar {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 12px;
+    background: rgba(2, 6, 23, 0.04);
+}
+[data-theme="dark"] .link-card-avatar {
+    background: rgba(255, 255, 255, 0.06);
+}
+.link-card-avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* ---- 卡片信息 ---- */
+.link-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.link-card-name {
+    font-weight: 600;
+    font-size: 0.95em;
+    margin-bottom: 0.15rem;
+    color: var(--primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.link-card-desc {
+    font-size: 0.82em;
+    color: var(--muted-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+/* ---- 底部统计 ---- */
+.links-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--muted-color);
+    font-size: 0.88em;
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 480px) {
+    .links-grid {
+        grid-template-columns: 1fr;
+    }
+}

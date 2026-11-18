@@ -1,0 +1,11 @@
+# Favicon cache
+assets/favicons/*
+!assets/favicons/.gitkeep
+
+# Server backup archives
+*.tar.gz
+*.tgz
+*.zip
+
+# macOS
+.DS_Store
