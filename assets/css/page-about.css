@@ -578,6 +578,56 @@
     --honor-c: #e977b0; --honor-bg: rgba(233, 119, 176, 0.12); --honor-bd: rgba(233, 119, 176, 0.30); --honor-hover: rgba(233, 119, 176, 0.40);
 }
 
+/* ---- 荣誉折叠：默认仅显示前 3 条 ---- */
+.honor-list.is-collapsed .honor-item:nth-child(n+4) {
+    display: none;
+}
+
+/* 展开时新出现的条目淡入 */
+@keyframes honorFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.honor-list:not(.is-collapsed) .honor-item:nth-child(n+4) {
+    animation: honorFadeIn 0.3s ease both;
+}
+
+/* 展开 / 收起按钮 */
+.honor-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35em;
+    width: 100%;
+    margin-top: 0.85rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px dashed rgba(2, 6, 23, 0.18);
+    background: transparent;
+    color: var(--muted-color);
+    font-size: 0.85em;
+    font-family: inherit;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+[data-theme="dark"] .honor-toggle {
+    border-color: rgba(255, 255, 255, 0.22);
+}
+.honor-toggle:hover {
+    color: var(--primary);
+    border-color: rgba(30, 136, 229, 0.45);
+    background: rgba(30, 136, 229, 0.04);
+}
+[data-theme="dark"] .honor-toggle:hover {
+    color: #6ca8f5;
+    border-color: rgba(100, 160, 240, 0.45);
+    background: rgba(100, 160, 240, 0.06);
+}
+.honor-toggle i {
+    font-size: 0.9em;
+    opacity: 0.75;
+}
+
 .honor-body {
     flex: 1;
     min-width: 0;

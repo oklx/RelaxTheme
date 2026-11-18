@@ -91,7 +91,7 @@ Typecho_Widget::widget('Widget_Stat')->to($stat);
     <?php if (!empty($honors)): ?>
     <section id="about-honors">
         <h2><i class="czs-medal"></i> 所获荣誉</h2>
-        <div class="honor-list">
+        <div class="honor-list<?php echo count($honors) > 3 ? ' is-collapsed' : ''; ?>">
             <?php foreach ($honors as $honor): ?>
             <?php $honorColorClass = daydream_honor_color_class($honor['color']); ?>
             <div class="honor-item<?php echo $honorColorClass ? ' ' . $honorColorClass : ''; ?>">
@@ -110,6 +110,25 @@ Typecho_Widget::widget('Widget_Stat')->to($stat);
             </div>
             <?php endforeach; ?>
         </div>
+        <?php if (count($honors) > 3): ?>
+        <button id="honor-toggle" class="honor-toggle" type="button">
+            展开全部（共 <?php echo count($honors); ?> 条）<i class="czs-angle-down-l"></i>
+        </button>
+        <script>
+        (function () {
+            var list = document.querySelector('#about-honors .honor-list');
+            var btn = document.getElementById('honor-toggle');
+            if (!list || !btn) return;
+            var total = <?php echo count($honors); ?>;
+            btn.addEventListener('click', function () {
+                var collapsed = list.classList.toggle('is-collapsed');
+                btn.innerHTML = collapsed
+                    ? '展开全部（共 ' + total + ' 条）<i class="czs-angle-down-l"></i>'
+                    : '收起<i class="czs-angle-up-l"></i>';
+            });
+        })();
+        </script>
+        <?php endif; ?>
     </section>
     <?php endif; ?>
 
