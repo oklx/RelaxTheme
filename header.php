@@ -125,19 +125,19 @@ $metaDescription = daydream_meta_description($this);
 	<link rel="preconnect" href="https://fonts.loli.net" crossorigin>
 	<link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
 	<!-- Pico.css -->
-	<link rel="stylesheet" href="<?php $this->options->themeUrl('/assets/css/pico.min.css');?>">
+	<link rel="stylesheet" href="<?php $this->options->themeUrl('/assets/css/pico.min.css'); daydream_asset_ver('/assets/css/pico.min.css');?>">
     <!-- Daydream CSS -->
-    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/style.css')?>" rel="stylesheet">
+    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/style.css'); daydream_asset_ver('/assets/css/style.css')?>" rel="stylesheet">
     <!-- Animate.css (async – not needed for first paint) -->
-    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/animate.min.css')?>" rel="stylesheet" media="print" onload="this.media='all'">
+    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/animate.min.css'); daydream_asset_ver('/assets/css/animate.min.css')?>" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Fancybox.css -->
-    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/jquery.fancybox.min.css')?>" rel="stylesheet" media="print" onload="this.media='all'">
+    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/jquery.fancybox.min.css'); daydream_asset_ver('/assets/css/jquery.fancybox.min.css')?>" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- KaTeX.css -->
-    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/katex.min.css')?>" rel="stylesheet" media="print" onload="this.media='all'">
+    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/katex.min.css'); daydream_asset_ver('/assets/css/katex.min.css')?>" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Highlight.js CSS (async – code blocks render fine without theme initially) -->
-    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/atom-one-dark.min.css')?>" rel="stylesheet" media="print" onload="this.media='all'">
+    <link type="text/css" href="<?php $this->options->themeUrl('/assets/css/atom-one-dark.min.css'); daydream_asset_ver('/assets/css/atom-one-dark.min.css')?>" rel="stylesheet" media="print" onload="this.media='all'">
     <!-- Caomei Icons CSS (async – icons not critical for first paint) -->
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('/assets/css/caomei.css')?>" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('/assets/css/caomei.css'); daydream_asset_ver('/assets/css/caomei.css')?>" media="print" onload="this.media='all'">
     <!-- Google Fonts (async – font-display:swap ensures text visible immediately) -->
     <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="https://fonts.loli.net/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -1062,16 +1062,16 @@ main           .katex-scroll{
 
 
     <!-- jQuery.js -->
-    <script src="<?php $this->options->themeUrl('/assets/js/jquery.min.js');?>"></script>
+    <script src="<?php $this->options->themeUrl('/assets/js/jquery.min.js'); daydream_asset_ver('/assets/js/jquery.min.js');?>"></script>
     <!-- jQuery.pjax.js -->
-    <script src="<?php $this->options->themeUrl('/assets/js/jquery.pjax.js');?>"></script>
+    <script src="<?php $this->options->themeUrl('/assets/js/jquery.pjax.js'); daydream_asset_ver('/assets/js/jquery.pjax.js');?>"></script>
     <!-- Highlight.js -->
-    <script defer src="<?php $this->options->themeUrl('/assets/js/highlight.min.js');?>"></script>
+    <script defer src="<?php $this->options->themeUrl('/assets/js/highlight.min.js'); daydream_asset_ver('/assets/js/highlight.min.js');?>"></script>
     <!-- Fancybox.js -->
-    <script defer src="<?php $this->options->themeUrl('/assets/js/jquery.fancybox.min.js');?>"></script>
+    <script defer src="<?php $this->options->themeUrl('/assets/js/jquery.fancybox.min.js'); daydream_asset_ver('/assets/js/jquery.fancybox.min.js');?>"></script>
     <!-- KaTeX.js -->
-    <script defer src="<?php $this->options->themeUrl('/assets/js/katex/katex.min.js');?>"></script>
-    <script defer src="<?php $this->options->themeUrl('/assets/js/katex/auto-render.min.js');?>"></script>
+    <script defer src="<?php $this->options->themeUrl('/assets/js/katex/katex.min.js'); daydream_asset_ver('/assets/js/katex/katex.min.js');?>"></script>
+    <script defer src="<?php $this->options->themeUrl('/assets/js/katex/auto-render.min.js'); daydream_asset_ver('/assets/js/katex/auto-render.min.js');?>"></script>
 
     <?php echo $headerCodeRaw; ?>
 

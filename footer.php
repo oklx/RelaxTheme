@@ -177,7 +177,7 @@
 
 </main>
 
-<script src="<?php $this->options->themeUrl('assets/js/toc.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/toc.js'); daydream_asset_ver('assets/js/toc.js'); ?>"></script>
 
 <script>
     $(document).pjax('a[href^="<?php $this->options->siteUrl()?>"]:not(a[target="_blank"])', {

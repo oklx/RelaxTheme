@@ -29,7 +29,7 @@ $socials = daydream_parse_lines($options->aboutSocials, array('platform', 'url',
 Typecho_Widget::widget('Widget_Stat')->to($stat);
 ?>
 
-<link rel="stylesheet" href="<?php $options->themeUrl('assets/css/page-about.css'); ?>">
+<link rel="stylesheet" href="<?php $options->themeUrl('assets/css/page-about.css'); daydream_asset_ver('assets/css/page-about.css'); ?>">
 
 <div class="about-page">
 
@@ -297,7 +297,7 @@ Typecho_Widget::widget('Widget_Stat')->to($stat);
 </div>
 
 <script>var __faviconProxy = '<?php $options->themeUrl('favicon.php'); ?>';</script>
-<script src="<?php $options->themeUrl('assets/js/page-about.js'); ?>"></script>
+<script src="<?php $options->themeUrl('assets/js/page-about.js'); daydream_asset_ver('assets/js/page-about.js'); ?>"></script>
 
 <?php $this->need('comments.php'); ?>
 <?php $this->need('footer.php'); ?>

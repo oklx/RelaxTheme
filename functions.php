@@ -351,6 +351,22 @@ function daydream_parse_lines($text, $keys) {
 }
 
 /**
+ * 输出静态资源的版本参数（?v=文件修改时间戳）
+ * 文件一变 URL 自动变化，浏览器缓存自动失效，无需手动刷新
+ * 用法：<link href="<?php $options->themeUrl('assets/css/style.css'); daydream_asset_ver('assets/css/style.css'); ?>">
+ * @param string $path  相对主题目录的资源路径（带不带前导 / 均可）
+ */
+function daydream_asset_ver($path) {
+    static $vers = array();
+    $key = ltrim($path, '/');
+    if (!isset($vers[$key])) {
+        $file = dirname(__FILE__) . '/' . $key;
+        $vers[$key] = is_file($file) ? '?v=' . filemtime($file) : '';
+    }
+    echo $vers[$key];
+}
+
+/**
  * 从 URL 中提取域名
  * @param string $url
  * @return string

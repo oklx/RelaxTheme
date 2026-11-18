@@ -20,7 +20,7 @@ $links = $parsed['links'];
 $linkCount = count($links);
 ?>
 
-<link rel="stylesheet" href="<?php $options->themeUrl('assets/css/page-links.css'); ?>">
+<link rel="stylesheet" href="<?php $options->themeUrl('assets/css/page-links.css'); daydream_asset_ver('assets/css/page-links.css'); ?>">
 
 <div class="links-page">
 
@@ -88,7 +88,7 @@ $linkCount = count($links);
 </div>
 
 <script>var __faviconProxy = '<?php $options->themeUrl('favicon.php'); ?>';</script>
-<script src="<?php $options->themeUrl('assets/js/page-links.js'); ?>"></script>
+<script src="<?php $options->themeUrl('assets/js/page-links.js'); daydream_asset_ver('assets/js/page-links.js'); ?>"></script>
 
 <?php $this->need('comments.php'); ?>
 <?php $this->need('footer.php'); ?>
