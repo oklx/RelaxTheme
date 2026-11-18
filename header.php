@@ -1147,6 +1147,31 @@ main           .katex-scroll{
 #fab-panel .iconbtn:active{ transform: translateY(1px); }
 #fab-panel .iconbtn svg{ width: 16px; height: 16px; display: block; }
 
+/* —— SVG 图标保护：fancybox/katex 等外部库带全局 svg 规则，会破坏内联图标 —— */
+/* fancybox: svg path{fill:currentColor;stroke-width:0} 会抹掉描边图标；katex: svg{position:absolute;width:100%} 会破坏布局 */
+#fab svg,
+#theme-fab svg,
+#fab-panel .iconbtn svg{
+  position: static !important;
+  display: block !important;
+  overflow: visible !important;
+  width: 20px !important;
+  height: 20px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+#fab-panel .iconbtn svg{ width: 16px !important; height: 16px !important; }
+#fab svg path, #fab svg circle, #fab svg line,
+#theme-fab svg path, #theme-fab svg circle, #theme-fab svg line,
+#fab-panel .iconbtn svg path, #fab-panel .iconbtn svg circle, #fab-panel .iconbtn svg line{
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+}
+
 /* 内容区：给滚动区域加底部内边距 & scroll-padding，最后一项不再被裁 */
 #fab-panel .bd{
   padding: .45rem .6rem .9rem;
