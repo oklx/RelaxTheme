@@ -9,3 +9,5 @@ assets/favicons/*
 
 # macOS
 .DS_Store
+demo-*.html
+preview-*.html
